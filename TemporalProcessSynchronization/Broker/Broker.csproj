@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5CC6DD01-1744-47CA-AA74-23650EEBB242}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Mediator</RootNamespace>
-    <AssemblyName>Mediator</AssemblyName>
+    <RootNamespace>Broker</RootNamespace>
+    <AssemblyName>Broker</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

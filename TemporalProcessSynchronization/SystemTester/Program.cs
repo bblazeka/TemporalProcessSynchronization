@@ -11,28 +11,28 @@ namespace SystemTester
 	{
 		static void Main(string[] args)
 		{
-			var mediatorProcess = new Process
+			var broker = new Process
 			{
 				StartInfo =
 				{
-					FileName = "Mediator.exe",
-					WorkingDirectory = "C:\\Users\\Martin\\Desktop\\TemporalProcessSynchronization\\TemporalProcessSynchronization\\Mediator\\bin\\Debug",
+					FileName = Properties.Resources.BrokerExe,
+					WorkingDirectory = Properties.Resources.BrokerDirectory,
 					Arguments = $"Hello world message!"
 				}
 			};
 
-			mediatorProcess.Start();
+			broker.Start();
 
-			var userProcess = new Process
+			var user = new Process
 			{
 				StartInfo =
 				{
-					FileName = "User.exe",
-					WorkingDirectory = "C:\\Users\\Martin\\Desktop\\TemporalProcessSynchronization\\TemporalProcessSynchronization\\User\\bin\\Debug"
+					FileName = Properties.Resources.UserExe,
+					WorkingDirectory = Properties.Resources.UserDirectory
 				}
 			};
 
-			userProcess.Start();
+			user.Start();
 		}
 	}
 }
