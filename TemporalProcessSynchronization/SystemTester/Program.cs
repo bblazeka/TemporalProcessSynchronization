@@ -17,7 +17,7 @@ namespace SystemTester
 				{
 					FileName = Properties.Resources.BrokerExe,
 					WorkingDirectory = Properties.Resources.BrokerDirectory,
-					Arguments = $"Hello world message!"
+					Arguments = $"Let the car in!"
 				}
 			};
 
@@ -28,11 +28,36 @@ namespace SystemTester
 				StartInfo =
 				{
 					FileName = Properties.Resources.UserExe,
-					WorkingDirectory = Properties.Resources.UserDirectory
+					WorkingDirectory = Properties.Resources.UserDirectory,
+                    Arguments = "1"
 				}
 			};
 
 			user.Start();
-		}
+
+            var user2 = new Process
+            {
+                StartInfo =
+                {
+                    FileName = Properties.Resources.UserExe,
+                    WorkingDirectory = Properties.Resources.UserDirectory,
+                    Arguments = "2"
+                }
+            };
+
+            user2.Start();
+
+            var user3 = new Process
+            {
+                StartInfo =
+                {
+                    FileName = Properties.Resources.UserExe,
+                    WorkingDirectory = Properties.Resources.UserDirectory,
+                    Arguments = "3"
+                }
+            };
+
+            user3.Start();
+        }
 	}
 }

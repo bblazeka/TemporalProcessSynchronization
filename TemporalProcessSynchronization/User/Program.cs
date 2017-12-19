@@ -13,10 +13,13 @@ namespace User
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.ExchangeDeclare(exchange: "logs", type: "fanout");
+                channel.ExchangeDeclare(exchange: "direct_logs", type: "direct");
 
                 var queueName = channel.QueueDeclare().QueueName;
-                channel.QueueBind(queue: queueName, exchange: "logs", routingKey: "");
+                channel.QueueBind(queue: queueName, exchange: "direct_logs", routingKey: args[0]);
+
+                // send a subscribe signal
+                Send(channel, "S("+args[0]+")");
 
                 Console.WriteLine(" [*] Waiting for message.");
 
@@ -32,6 +35,13 @@ namespace User
                 Console.WriteLine(" Press [enter] to exit.");
                 Console.ReadLine();
             }
+        }
+
+        public static void Send(IModel channel, string message)
+        {
+            var body = Encoding.UTF8.GetBytes(message);
+            channel.BasicPublish(exchange: "direct_logs", routingKey: "0", basicProperties: null, body: body);
+            Console.WriteLine(" [x] Sent {0}", message);
         }
     }
 }
