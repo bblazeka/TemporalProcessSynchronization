@@ -17,7 +17,7 @@ namespace SystemTester
 				{
 					FileName = Properties.Resources.BrokerExe,
 					WorkingDirectory = Properties.Resources.BrokerDirectory,
-					Arguments = $"Let the car in!"
+					Arguments = $"Customer call!"
 				}
 			};
 

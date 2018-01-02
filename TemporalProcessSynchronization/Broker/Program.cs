@@ -13,25 +13,31 @@ namespace Mediator
             var factory = new ConnectionFactory() { HostName = "localhost" };
             Random rnd = new Random();
             var subscriptions = new Dictionary<string, string>();
+            var counters = new Dictionary<string, int>();
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
                 channel.ExchangeDeclare(exchange: "direct_logs", type: "direct");
-                Receive(subscriptions, channel);
+                Receive(counters, subscriptions, channel);
 	            while (true)
                 {
-                    var randomLocation = (rnd.Next() % 3 + 1).ToString();
+                    if(subscriptions.Count == 0)
+                    {
+                        continue;
+                    }
+                    var randomLocation = (rnd.Next() % subscriptions.Count + 1).ToString();
 
                     System.Threading.Thread.Sleep(1000);
-					var message = randomLocation+" "+GetMessage(args);
+                    counters[randomLocation] = (counters[randomLocation] + 1) % 200;
+					var message = counters[randomLocation]+" "+GetMessage(args);
 		            var body = Encoding.UTF8.GetBytes(message);
 		            channel.BasicPublish(exchange: "direct_logs", routingKey: subscriptions[randomLocation], basicProperties: null, body: body);
-		            Console.WriteLine(" [x] Sent {0}", message);
+		            Console.WriteLine(" [x] Sent to {1}: {0}", message,randomLocation);
 				}
             }
         }
 
-        public static void Receive(Dictionary<string,string> subs, IModel channel)
+        public static void Receive(Dictionary<string,int> counters, Dictionary<string,string> subs, IModel channel)
         {
             var queueName = channel.QueueDeclare().QueueName;
             channel.QueueBind(queue: queueName, exchange: "direct_logs", routingKey: "0");
@@ -42,6 +48,7 @@ namespace Mediator
                 var body = ea.Body;
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine(" [x] {0}", message);
+                counters.Add(message.Substring(2,1), 0);
                 subs.Add(message.Substring(2, 1), ea.DeliveryTag.ToString());
             };
             channel.BasicConsume(queue: queueName, noAck: false, consumer: consumer);
