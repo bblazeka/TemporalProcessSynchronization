@@ -1,11 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Base;
 
 namespace GeigerCounterSystem
 {
-	public class GeigerCounterSystem
+	public class System
 	{
 		private const int SendDelay = 5000;	// send every 5 seconds
 
@@ -15,7 +16,7 @@ namespace GeigerCounterSystem
 
 		private bool _isRunning;
 
-		public GeigerCounterSystem(MeasurementManager manager, ISender sender)
+		public System(MeasurementManager manager, ISender sender)
 		{
 			_watch = Stopwatch.StartNew();
 			_isRunning = false;
@@ -35,7 +36,7 @@ namespace GeigerCounterSystem
 			return _measurementManager.GetMeasure(_getCalculatedRow());
 		}
 
-		public void StartMeasuring() => Task.Factory.StartNew(() =>
+		public void StartMeasuring() 
 		{
 			_isRunning = true;
 
@@ -46,8 +47,9 @@ namespace GeigerCounterSystem
 				var data = ThresholdCalculator.Calculate(_emulateMeasurement());
 				var bytes = data.ToByteArray();
 				_sender.Send(bytes);
+				Console.Write($"Sent data: [{data}]\n");
 			}
-		});
+		}
 
 		public void StopMeasuring()
 		{

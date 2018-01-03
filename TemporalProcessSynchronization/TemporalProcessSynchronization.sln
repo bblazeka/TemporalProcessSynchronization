@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeigerCounterSystem", "Geig
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base", "Base\Base.csproj", "{278269D5-1AE1-4966-961D-5A242B8E449B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageCommunication", "MessageCommunication\MessageCommunication.csproj", "{32F0D577-655A-432D-B4DB-89DDC0066443}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter", "Starter\Starter.csproj", "{C570BF37-0774-474D-B2B4-354CE7B813AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{278269D5-1AE1-4966-961D-5A242B8E449B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{278269D5-1AE1-4966-961D-5A242B8E449B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{278269D5-1AE1-4966-961D-5A242B8E449B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32F0D577-655A-432D-B4DB-89DDC0066443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32F0D577-655A-432D-B4DB-89DDC0066443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32F0D577-655A-432D-B4DB-89DDC0066443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32F0D577-655A-432D-B4DB-89DDC0066443}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C570BF37-0774-474D-B2B4-354CE7B813AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C570BF37-0774-474D-B2B4-354CE7B813AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C570BF37-0774-474D-B2B4-354CE7B813AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C570BF37-0774-474D-B2B4-354CE7B813AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

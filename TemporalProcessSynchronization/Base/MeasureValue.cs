@@ -14,5 +14,10 @@ namespace Base
 			Status = status;
 			Value = value;
 		}
+
+		public override string ToString()
+		{
+			return $"Status: {Status} | Measure: {Value} uSv/h";
+		}
 	}
 }

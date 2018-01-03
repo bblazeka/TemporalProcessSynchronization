@@ -79,6 +79,24 @@ namespace SystemTester.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to C:\\Users\\Martin\\Desktop\\TemporalProcessSynchronization\\TemporalProcessSynchronization\\Starter\\bin\\Debug.
+        /// </summary>
+        internal static string TesterDirectory {
+            get {
+                return ResourceManager.GetString("TesterDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starter.exe.
+        /// </summary>
+        internal static string TesterExe {
+            get {
+                return ResourceManager.GetString("TesterExe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to C:\\Users\\Martin\\Desktop\\TemporalProcessSynchronization\\TemporalProcessSynchronization\\User\\bin\\Debug.
         /// </summary>
         internal static string UserDirectory {
