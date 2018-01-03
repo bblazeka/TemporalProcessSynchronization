@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GeigerCounterSystem;
 
 namespace SystemTester
 {
@@ -11,53 +12,59 @@ namespace SystemTester
 	{
 		static void Main(string[] args)
 		{
-			var broker = new Process
-			{
-				StartInfo =
-				{
-					FileName = Properties.Resources.BrokerExe,
-					WorkingDirectory = Properties.Resources.BrokerDirectory,
-					Arguments = $"Customer call!"
-				}
-			};
+			//var broker = new Process
+			//{
+			//	StartInfo =
+			//	{
+			//		FileName = Properties.Resources.BrokerExe,
+			//		WorkingDirectory = Properties.Resources.BrokerDirectory,
+			//		Arguments = $"Customer call!"
+			//	}
+			//};
 
-			broker.Start();
+			//broker.Start();
 
-			var user = new Process
-			{
-				StartInfo =
-				{
-					FileName = Properties.Resources.UserExe,
-					WorkingDirectory = Properties.Resources.UserDirectory,
-                    Arguments = "1"
-				}
-			};
+			//var user = new Process
+			//{
+			//	StartInfo =
+			//	{
+			//		FileName = Properties.Resources.UserExe,
+			//		WorkingDirectory = Properties.Resources.UserDirectory,
+   //                 Arguments = "1"
+			//	}
+			//};
 
-			user.Start();
+			//user.Start();
 
-            var user2 = new Process
-            {
-                StartInfo =
-                {
-                    FileName = Properties.Resources.UserExe,
-                    WorkingDirectory = Properties.Resources.UserDirectory,
-                    Arguments = "2"
-                }
-            };
+   //         var user2 = new Process
+   //         {
+   //             StartInfo =
+   //             {
+   //                 FileName = Properties.Resources.UserExe,
+   //                 WorkingDirectory = Properties.Resources.UserDirectory,
+   //                 Arguments = "2"
+   //             }
+   //         };
 
-            user2.Start();
+   //         user2.Start();
 
-            var user3 = new Process
-            {
-                StartInfo =
-                {
-                    FileName = Properties.Resources.UserExe,
-                    WorkingDirectory = Properties.Resources.UserDirectory,
-                    Arguments = "3"
-                }
-            };
+   //         var user3 = new Process
+   //         {
+   //             StartInfo =
+   //             {
+   //                 FileName = Properties.Resources.UserExe,
+   //                 WorkingDirectory = Properties.Resources.UserDirectory,
+   //                 Arguments = "3"
+   //             }
+   //         };
 
-            user3.Start();
-        }
+   //         user3.Start();
+
+			var reader = new MeasurementManager("C:/Users/Martin/Desktop/measures.txt");
+
+			var data = reader.GetMeasure(19);
+
+			Console.ReadKey();
+		}
 	}
 }
