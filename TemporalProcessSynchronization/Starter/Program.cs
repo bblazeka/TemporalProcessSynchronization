@@ -14,7 +14,7 @@ namespace Starter
 		{
 			using (var sender = new Sender("radiation_exchange", "fanout", "localhost"))
 			{
-				var manager = new MeasurementManager("C:/Users/Martin/Desktop/measures.txt");
+				var manager = new MeasurementManager(Properties.Resources.Directory);
 				var system = new GeigerCounterSystem.System(manager, sender);
 				system.StartMeasuring();
 			}
