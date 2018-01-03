@@ -4,6 +4,7 @@ using System.Text;
 using RabbitMQ.Client.Events;
 using System.Collections.Generic;
 using Base;
+using MessageCommunication;
 
 namespace Broker
 {
@@ -12,7 +13,8 @@ namespace Broker
         public static void Main(string[] args)
         {
             var factory = new ConnectionFactory { HostName = "localhost" };
-	
+
+			using (var sender = new Sender("measures_subscribe", "direct", "localhost"))
 			using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
@@ -30,6 +32,8 @@ namespace Broker
 		            var data = ea.Body.ToObject<MeasureValue>();
 
 		            Console.WriteLine($"Received data: [{data}]\n");
+
+					sender.Send(body, data.Status);
 	            };
 
 	            while (true)

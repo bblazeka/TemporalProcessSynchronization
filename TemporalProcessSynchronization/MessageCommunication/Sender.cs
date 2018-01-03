@@ -8,23 +8,26 @@ namespace MessageCommunication
 	{
 		private readonly IModel _channel;
 		private readonly IConnection _connection;
+		private readonly string _exchange;
 
-		public Sender()
+		public Sender(string exchange, string type, string hostName)
 		{
-			var factory = new ConnectionFactory { HostName = "localhost" };
+			_exchange = exchange;
+
+			var factory = new ConnectionFactory { HostName = hostName };
 			_connection = factory.CreateConnection();
 			_channel = _connection.CreateModel();
-			_init(_channel);
+			_channel.ExchangeDeclare(exchange: _exchange, type: type);
 		}
 
-		private void _init(IModel channel)
+		public void Send(byte[] data)
 		{
-			channel.ExchangeDeclare(exchange: "radiation_exchange", type: "fanout");
+			_channel.BasicPublish(exchange: _exchange, routingKey: "", basicProperties: null, body: data);
 		}
 
-		public void Send(byte[] value)
+		public void Send(byte[] data, string routingKey)
 		{
-			_channel.BasicPublish(exchange: "radiation_exchange", routingKey: "", basicProperties: null, body: value);
+			_channel.BasicPublish(exchange: _exchange, routingKey: routingKey, basicProperties: null, body: data);
 		}
 
 		public void Dispose()

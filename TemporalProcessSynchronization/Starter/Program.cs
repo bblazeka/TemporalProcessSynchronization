@@ -12,7 +12,7 @@ namespace Starter
 	{
 		public static void Main(string[] args)
 		{
-			using (var sender = new Sender())
+			using (var sender = new Sender("radiation_exchange", "fanout", "localhost"))
 			{
 				var manager = new MeasurementManager("C:/Users/Martin/Desktop/measures.txt");
 				var system = new GeigerCounterSystem.System(manager, sender);

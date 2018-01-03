@@ -2,6 +2,8 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
+using Base;
+using MessageCommunication;
 
 namespace User
 {
@@ -9,39 +11,32 @@ namespace User
     {
         static void Main(string[] args)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
-            {
-                channel.ExchangeDeclare(exchange: "direct_logs", type: "direct");
+			var factory = new ConnectionFactory { HostName = "localhost" };
+			using (var connection = factory.CreateConnection())
+			using (var channel = connection.CreateModel())
+			{
+				Console.WriteLine("----Waiting for warning signals-----");
 
-                var queueName = channel.QueueDeclare().QueueName;
-                channel.QueueBind(queue: queueName, exchange: "direct_logs", routingKey: args[0]);
+				void Command(object model, BasicDeliverEventArgs ea)
+				{
+					var body = ea.Body;
+					var data = body.ToObject<MeasureValue>();
 
-                // send a subscribe signal
-                Send(channel, "S("+args[0]+")");
+					Console.WriteLine($"Received data: [{data}]\n");
+				}
 
-                Console.WriteLine(" [*] Waiting for message.");
+				var warningSubscribe = new WarningAlertSubscriber(channel, Command, "measures_subscribe");
+				var criticalSubscribe = new CriticalAlertSubscriber(channel, Command, "measures_subscribe");
 
-                var consumer = new EventingBasicConsumer(channel);
-                consumer.Received += (model, ea) =>
-                {
-                    var body = ea.Body;
-                    var message = Encoding.UTF8.GetString(body);
-                    Console.WriteLine(" [x] {0}", message);
-                };
-                channel.BasicConsume(queue: queueName, noAck: false, consumer: consumer);
+				warningSubscribe.Subscribe();
+				criticalSubscribe.Subscribe();
 
-                Console.WriteLine(" Press [enter] to exit.");
-                Console.ReadLine();
-            }
-        }
-
-        public static void Send(IModel channel, string message)
-        {
-            var body = Encoding.UTF8.GetBytes(message);
-            channel.BasicPublish(exchange: "direct_logs", routingKey: "0", basicProperties: null, body: body);
-            Console.WriteLine(" [x] Sent {0}", message);
-        }
+				while (true)
+				{
+					warningSubscribe.Consume();
+					criticalSubscribe.Consume();
+				}
+			}
+		}
     }
 }
