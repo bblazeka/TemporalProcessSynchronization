@@ -43,7 +43,7 @@ namespace GeigerCounterSystem
 			{
 				Thread.Sleep(SendDelay);
 
-				var data = _emulateMeasurement();
+				var data = ThresholdCalculator.Calculate(_emulateMeasurement());
 				var bytes = data.ToByteArray();
 				_sender.Send(bytes);
 			}

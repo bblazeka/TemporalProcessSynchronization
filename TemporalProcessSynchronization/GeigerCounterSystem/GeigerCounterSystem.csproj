@@ -43,6 +43,7 @@
     <Compile Include="GeigerCounterSystem.cs" />
     <Compile Include="MeasurementManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThresholdCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base\Base.csproj">
