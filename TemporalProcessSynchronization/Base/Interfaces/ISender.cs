@@ -1,4 +1,4 @@
-﻿namespace Base
+﻿namespace Base.Interfaces
 {
 	public interface ISender
 	{

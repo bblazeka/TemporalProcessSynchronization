@@ -1,5 +1,5 @@
 ﻿using System;
-using Base;
+using Base.Interfaces;
 using RabbitMQ.Client;
 
 namespace MessageCommunication

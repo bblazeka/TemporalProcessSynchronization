@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Base
+namespace Base.Extensions
 {
 	public static class ObjectBytesExtensions
 	{

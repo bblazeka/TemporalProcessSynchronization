@@ -5,11 +5,11 @@ using RabbitMQ.Client.Events;
 
 namespace MessageCommunication
 {
-	public class NormalAlertSubscriber : AlertSubscriber
+	public class NormalAlertConsumer : AlertConsumer
 	{
 		public override ThresholdStatus SubscribeKey => ThresholdStatus.Normal;
 
-		public NormalAlertSubscriber(IModel channel, EventHandler<BasicDeliverEventArgs> command, string exchange) 
+		public NormalAlertConsumer(IModel channel, EventHandler<BasicDeliverEventArgs> command, string exchange) 
 			: base(channel, command, exchange)
 		{
 		}

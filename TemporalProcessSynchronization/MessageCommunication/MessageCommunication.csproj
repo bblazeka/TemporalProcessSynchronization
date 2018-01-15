@@ -43,13 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlertSubscriber.cs" />
-    <Compile Include="CriticalAlertSubscriber.cs" />
-    <Compile Include="ExchangeFactory.cs" />
-    <Compile Include="NormalAlertSubscriber.cs" />
+    <Compile Include="AlertConsumer.cs" />
+    <Compile Include="CriticalAlertConsumer.cs" />
+    <Compile Include="NormalAlertConsumer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sender.cs" />
-    <Compile Include="WarningAlertSubscriber.cs" />
+    <Compile Include="WarningAlertConsumer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base\Base.csproj">

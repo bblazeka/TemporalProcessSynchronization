@@ -9,11 +9,11 @@ using RabbitMQ.Client.Events;
 
 namespace MessageCommunication
 {
-	public class CriticalAlertSubscriber : AlertSubscriber
+	public class WarningAlertConsumer : AlertConsumer
 	{
-		public override ThresholdStatus SubscribeKey => ThresholdStatus.Critical;
+		public override ThresholdStatus SubscribeKey => ThresholdStatus.Warning;
 
-		public CriticalAlertSubscriber(IModel channel, EventHandler<BasicDeliverEventArgs> command, string exchange) 
+		public WarningAlertConsumer(IModel channel, EventHandler<BasicDeliverEventArgs> command, string exchange) 
 			: base(channel, command, exchange)
 		{
 		}

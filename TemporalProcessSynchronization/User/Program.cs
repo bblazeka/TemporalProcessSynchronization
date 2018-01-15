@@ -1,8 +1,8 @@
 ﻿using System;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Text;
 using Base;
+using Base.Extensions;
 using MessageCommunication;
 
 namespace User
@@ -25,16 +25,13 @@ namespace User
 					Console.WriteLine($"Received data: [{data}]\n");
 				}
 
-				var warningSubscribe = new WarningAlertSubscriber(channel, Command, "measures_subscribe");
-				var criticalSubscribe = new CriticalAlertSubscriber(channel, Command, "measures_subscribe");
+				var warningSubscribe = new WarningAlertConsumer(channel, Command, Exchanges.AlertsPublisherExchange);
 
 				warningSubscribe.Subscribe();
-				criticalSubscribe.Subscribe();
 
 				while (true)
 				{
 					warningSubscribe.Consume();
-					criticalSubscribe.Consume();
 				}
 			}
 		}

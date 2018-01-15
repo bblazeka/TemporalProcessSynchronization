@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
 using RabbitMQ.Client;
-using System.Text;
 using RabbitMQ.Client.Events;
-using System.Collections.Generic;
 using Base;
+using Base.Extensions;
 using MessageCommunication;
 
 namespace Broker
@@ -12,35 +12,45 @@ namespace Broker
     {
         public static void Main(string[] args)
         {
-            var factory = new ConnectionFactory { HostName = "localhost" };
+   //         var factory = new ConnectionFactory { HostName = "localhost" };
 
-			using (var sender = new Sender("measures_subscribe", "direct", "localhost"))
-			using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
-            {
-                channel.ExchangeDeclare(exchange: "radiation_exchange", type: "fanout");
+   //         using (var sender = new Sender(Exchanges.AlertsPublisherExchange, ExchangeType.Direct, "localhost"))
+			//using (var connection = factory.CreateConnection())
+   //         using (var channel = connection.CreateModel())
+   //         {
+   //             channel.ExchangeDeclare(exchange: Exchanges.AlertsReceiverExchange, type: ExchangeType.Fanout);
+	  //          channel.QueueDeclare(queue: "radiation_receiver", durable: true, exclusive: true);
+   //             channel.QueueBind(queue: "radiation_receiver", exchange: Exchanges.AlertsReceiverExchange, routingKey: "");
 
-	            channel.QueueDeclare(queue: "radiation_receiver", durable: true, exclusive: true);
+   //             //channel.QueueDeclare(queue: "measures_normal", durable: true, exclusive: false);
+   //             //channel.QueueDeclare(queue: "measures_warning", durable: true, exclusive: false);
+   //             //channel.QueueDeclare(queue: "measures_critical", durable: true, exclusive: false);
 
-				channel.QueueBind(queue: "radiation_receiver", exchange: "radiation_exchange", routingKey: "");
+   //             //channel.QueueBind(queue: "measures_normal", exchange: "measures_subscribe", routingKey: "Normal");
+   //             //channel.QueueBind(queue: "measures_warning", exchange: "measures_subscribe", routingKey: "Warning");
+   //             //channel.QueueBind(queue: "measures_critical", exchange: "measures_subscribe", routingKey: "Critical");
 
-				var consumer = new EventingBasicConsumer(channel);
+			//	var consumer = new EventingBasicConsumer(channel);
 
-	            consumer.Received += (model, ea) =>
-	            {
-		            var body = ea.Body;
-		            var data = ea.Body.ToObject<MeasureValue>();
+	  //          consumer.Received += (model, ea) =>
+	  //          {
+		 //           var body = ea.Body;
+		 //           var data = ea.Body.ToObject<MeasureValue>();
 
-		            Console.WriteLine($"Received data: [{data}]\n");
+		 //           Console.WriteLine($"Received data: [{data}]\n");
 
-					sender.Send(body, data.Status);
-	            };
+			//		sender.Send(body, data.Status);
+	  //          };
 
-	            while (true)
-	            {
-					channel.BasicConsume(queue: "radiation_receiver", noAck: false, consumer: consumer);
-				}
-            }
+	  //          while (true)
+	  //          {
+   //                 // Console.WriteLine("Waiting for measures...");
+			//		channel.BasicConsume(queue: Exchanges.AlertsReceiverExchange, noAck: false, consumer: consumer);
+			//	}
+   //         }
+
+            var broker = new AlertsBroker();
+            broker.Listen();
         }
     }
 }

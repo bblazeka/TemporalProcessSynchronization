@@ -5,7 +5,7 @@ using RabbitMQ.Client.Events;
 
 namespace MessageCommunication
 {
-	public abstract class AlertSubscriber
+	public abstract class AlertConsumer
 	{
 		private readonly IModel _channel;
 		private readonly EventingBasicConsumer _consumer;
@@ -14,8 +14,7 @@ namespace MessageCommunication
 
 		public abstract ThresholdStatus SubscribeKey { get; }
 
-
-		protected AlertSubscriber(IModel channel, EventHandler<BasicDeliverEventArgs> command, string exchange)
+		protected AlertConsumer(IModel channel, EventHandler<BasicDeliverEventArgs> command, string exchange)
 		{
 			_channel = channel;
 			_consumer = new EventingBasicConsumer(channel);

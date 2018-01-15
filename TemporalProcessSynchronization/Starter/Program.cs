@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GeigerCounterSystem;
+﻿using GeigerCounterSystem;
 using MessageCommunication;
 
 namespace Starter
@@ -14,7 +9,7 @@ namespace Starter
 		{
 			using (var sender = new Sender("radiation_exchange", "fanout", "localhost"))
 			{
-				var manager = new MeasurementManager("C:/Users/Martin/Desktop/measures.txt");
+				var manager = new MeasurementManager("C:\\Source\\TemporalProcessSynchronization\\measures.txt");
 				var system = new GeigerCounterSystem.System(manager, sender);
 				system.StartMeasuring();
 			}
