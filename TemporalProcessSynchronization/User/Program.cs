@@ -4,6 +4,8 @@ using RabbitMQ.Client.Events;
 using Base;
 using Base.Extensions;
 using MessageCommunication;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace User
 {
@@ -11,29 +13,53 @@ namespace User
     {
         static void Main(string[] args)
         {
-			var factory = new ConnectionFactory { HostName = "localhost" };
-			using (var connection = factory.CreateConnection())
-			using (var channel = connection.CreateModel())
-			{
-				Console.WriteLine("----Waiting for warning signals-----");
+            var factory = new ConnectionFactory { HostName = "localhost" };
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                var subscriptions = new List<AlertConsumer>();
 
-				void Command(object model, BasicDeliverEventArgs ea)
-				{
-					var body = ea.Body;
-					var data = body.ToObject<MeasureValue>();
+                Console.Write("----Waiting for [");
+                foreach (var type in args)
+                {
+                    Console.Write(type.ToUpper() + " ");
+                }
+                Console.WriteLine("] signals-----");
 
-					Console.WriteLine($"Received data: [{data}]\n");
-				}
+                void Command(object model, BasicDeliverEventArgs ea)
+                {
+                    var body = ea.Body;
+                    var data = body.ToObject<MeasureValue>();
 
-				var warningSubscribe = new WarningAlertConsumer(channel, Command, Exchanges.AlertsPublisherExchange);
+                    Console.WriteLine($"Received data: [{data}]\n");
+                }
 
-				warningSubscribe.Subscribe();
+                if (Array.IndexOf(args, "normal") > -1)
+                {
+                    subscriptions.Add(new NormalAlertConsumer(channel, Command, Exchanges.AlertsPublisherExchange));
+                }
+                if (Array.IndexOf(args, "warning") > -1)
+                {
+                    subscriptions.Add(new WarningAlertConsumer(channel, Command, Exchanges.AlertsPublisherExchange));
+                }
+                subscriptions.Add(new CriticalAlertConsumer(channel, Command, Exchanges.AlertsPublisherExchange));
 
-				while (true)
-				{
-					warningSubscribe.Consume();
-				}
-			}
-		}
+                foreach (var sub in subscriptions)
+                {
+                    sub.Subscribe();
+                }
+
+                foreach (var sub in subscriptions)
+                {
+                    Task.Factory.StartNew(() =>
+                    {
+                        while (true)
+                        {
+                            sub.Consume();
+                        }
+                    });
+                }
+            }
+        }
     }
 }
