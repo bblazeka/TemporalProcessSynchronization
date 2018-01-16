@@ -2,11 +2,11 @@
 {
     public class Queues
     {
-        public const string NormalAlertQueue = "";
+        public const string NormalAlertQueue = "geiger_normal_alert_queue";
 
-        public const string WarniningAlertQueue = "";
+        public const string WarniningAlertQueue = "geiger_warning_alert_queue";
 
-        public const string CriticalAlertQueue = "";
+        public const string CriticalAlertQueue = "geiger_critical_alert_queue";
 
         public const string GeigerReceiverQueue = "qeiger_receiver_queue";
     }

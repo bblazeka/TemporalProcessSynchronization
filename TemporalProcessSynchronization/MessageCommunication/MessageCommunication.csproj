@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlertConsumer.cs" />
+    <Compile Include="ConsumerNotSubscribedException.cs" />
     <Compile Include="CriticalAlertConsumer.cs" />
     <Compile Include="NormalAlertConsumer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

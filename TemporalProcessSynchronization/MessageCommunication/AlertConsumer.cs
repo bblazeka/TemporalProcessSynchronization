@@ -5,32 +5,42 @@ using RabbitMQ.Client.Events;
 
 namespace MessageCommunication
 {
-	public abstract class AlertConsumer
+	public abstract class AlertConsumer : IDisposable
 	{
 		private readonly IModel _channel;
+
 		private readonly EventingBasicConsumer _consumer;
-		private readonly string _exchange;
-		private readonly string _queueName;
+
+        public abstract string Queue { get; }
 
 		public abstract ThresholdStatus SubscribeKey { get; }
 
-		protected AlertConsumer(IModel channel, EventHandler<BasicDeliverEventArgs> command, string exchange)
+		protected AlertConsumer(IConnection connection, EventHandler<BasicDeliverEventArgs> command)
 		{
-			_channel = channel;
-			_consumer = new EventingBasicConsumer(channel);
-			_consumer.Received += command;
-			_exchange = exchange;
-			_queueName = channel.QueueDeclare().QueueName;
+			_channel = connection.CreateModel();
+			_consumer = new EventingBasicConsumer(_channel);
+		    _consumer.Received += command;
 		}
 
-		public void Subscribe()
+        public void Subscribe(string exchange)
 		{
-			_channel.QueueBind(queue: _queueName, exchange: _exchange, routingKey: SubscribeKey.ToString());
-		}
+            _channel.QueueDeclare(queue: Queue, durable: true, exclusive: false);
+            _channel.QueueBind(queue: Queue, exchange: exchange, routingKey: SubscribeKey.ToString());
+        }
 
 		public void Consume()
 		{
-			_channel.BasicConsume(queue: _queueName, noAck: false, consumer: _consumer);
+		    //if (_exchange == null)
+		    //{
+		    //    throw new ConsumerNotSubscribedException();
+		    //}
+
+			_channel.BasicConsume(queue: Queue, noAck: false, consumer: _consumer);
 		}
+
+	    public void Dispose()
+	    {
+	        _channel?.Dispose();
+	    }
 	}
 }

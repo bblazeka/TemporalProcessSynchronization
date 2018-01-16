@@ -7,10 +7,12 @@ namespace MessageCommunication
 {
 	public class NormalAlertConsumer : AlertConsumer
 	{
-		public override ThresholdStatus SubscribeKey => ThresholdStatus.Normal;
+	    public override string Queue => Queues.NormalAlertQueue;
 
-		public NormalAlertConsumer(IModel channel, EventHandler<BasicDeliverEventArgs> command, string exchange) 
-			: base(channel, command, exchange)
+	    public override ThresholdStatus SubscribeKey => ThresholdStatus.Normal;
+
+		public NormalAlertConsumer(IConnection connection, EventHandler<BasicDeliverEventArgs> command) 
+			: base(connection, command)
 		{
 		}
 	}
