@@ -12,7 +12,7 @@ namespace Base
 
 		public double Value { get; }
 
-	    public string GetStringValue() => Value.ToString(CultureInfo.InvariantCulture);
+	    public string GetStringValue() => Value.ToString(CultureInfo.InvariantCulture) + " uSv/h";
 
 	    public string GetTimeStamp() => TimeStamp.ToString();
 

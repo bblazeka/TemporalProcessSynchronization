@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Base;
 using MeasureValue = Base.MeasureValue;
 
 namespace User
@@ -63,6 +64,7 @@ namespace User
             Invoke(new Action(() =>
             {
                 var item = new ListViewItem(value.GetTimeStamp());
+                item.BackColor = CommonManager.GetColorForStatus(value.Status);
                 item.SubItems.Add(value.GetStringValue());
                 item.SubItems.Add(value.Status);
                 listMeasures.Items.Add(item);

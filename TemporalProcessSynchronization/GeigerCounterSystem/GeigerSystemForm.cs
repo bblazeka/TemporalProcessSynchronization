@@ -16,7 +16,7 @@ namespace GeigerCounterSystem
         public GeigerSystemForm()
         {
             _sender = new Sender(Exchanges.AlertsReceiverExchange, "fanout", "localhost");
-            var manager = new MeasurementManager("C:\\Source\\TemporalProcessSynchronization\\measures.txt");
+            var manager = new MeasurementManager("measures.txt");
             _system = new CounterSystem(manager, _sender, 1000);
             _system.Attach(this);
 
@@ -52,6 +52,7 @@ namespace GeigerCounterSystem
             Invoke(new Action(() =>
             {
                 var item = new ListViewItem(value.GetTimeStamp());
+                item.BackColor = CommonManager.GetColorForStatus(value.Status);
                 item.SubItems.Add(value.GetStringValue());
                 item.SubItems.Add(value.Status);
                 listMeasures.Items.Add(item);
