@@ -42,8 +42,10 @@
   <ItemGroup>
     <Compile Include="Exchanges.cs" />
     <Compile Include="Interfaces\ISender.cs" />
+    <Compile Include="IObserver.cs" />
     <Compile Include="MeasureValue.cs" />
     <Compile Include="Extensions\ObjectBytesExtensions.cs" />
+    <Compile Include="Observable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queues.cs" />
     <Compile Include="ThresholdStatus.cs" />

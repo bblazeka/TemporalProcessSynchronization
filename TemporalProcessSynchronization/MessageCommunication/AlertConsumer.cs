@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Base;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
 namespace MessageCommunication
 {
-	public abstract class AlertConsumer : IDisposable
+	public abstract class AlertConsumer : Observable<AlertConsumer>, IDisposable
 	{
 		private readonly IModel _channel;
 
@@ -14,6 +15,8 @@ namespace MessageCommunication
         public abstract string Queue { get; }
 
 		public abstract ThresholdStatus SubscribeKey { get; }
+
+	    private bool _isConsuming;
 
 		protected AlertConsumer(IConnection connection, EventHandler<BasicDeliverEventArgs> command)
 		{
@@ -30,13 +33,23 @@ namespace MessageCommunication
 
 		public void Consume()
 		{
-		    //if (_exchange == null)
-		    //{
-		    //    throw new ConsumerNotSubscribedException();
-		    //}
+		    Task.Factory.StartNew(() =>
+		    {
+		        _isConsuming = true;
 
-			_channel.BasicConsume(queue: Queue, noAck: false, consumer: _consumer);
+		        while (_isConsuming)
+		        {
+		            _channel.BasicConsume(queue: Queue, noAck: false, consumer: _consumer);
+                }
+		    });
 		}
+
+	    public void StopConsuming()
+	    {
+	        _isConsuming = false;
+            Dispose();
+            Notify(this);
+	    }
 
 	    public void Dispose()
 	    {

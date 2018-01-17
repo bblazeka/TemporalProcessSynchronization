@@ -28,6 +28,9 @@ function rassusStart
         $root_path = "$($path)\\TemporalProcessSynchronization\\TemporalProcessSynchronization"
         buildVS -path $root_path;
         Start-process -FilePath "$($root_path)\\Broker\\bin\\Debug\\Broker.exe";
-        Start-process -FilePath "$($root_path)\\Starter\\bin\\Debug\\Starter.exe"; 
+        Start-process -FilePath "$($root_path)\\User\\bin\\Debug\\User.exe" -ArgumentList "warning";
+ 		Start-process -FilePath "$($root_path)\\User\\bin\\Debug\\User.exe" -ArgumentList "critical";
+        Start-process -FilePath "$($root_path)\\User\\bin\\Debug\\User.exe" -ArgumentList "normal";
+        Start-process -FilePath "$($root_path)\\GeigerCounterSystem\\bin\\Debug\\GeigerCounterSystem.exe";
     }
 }
