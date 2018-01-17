@@ -55,6 +55,7 @@ namespace GeigerCounterSystem
                 item.SubItems.Add(value.GetStringValue());
                 item.SubItems.Add(value.Status);
                 listMeasures.Items.Add(item);
+                listMeasures.EnsureVisible(listMeasures.Items.Count - 1);
             }));
         }
 

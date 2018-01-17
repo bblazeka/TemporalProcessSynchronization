@@ -29,19 +29,19 @@ namespace MessageCommunication
 		}
 
         public void Subscribe(string exchange)
-		{
-            _queue = _channel.QueueDeclare(durable: false, exclusive: true).QueueName;
+        {
+            _queue = _channel.QueueDeclare(durable: false, exclusive: false).QueueName;
             _channel.QueueBind(queue: _queue, exchange: exchange, routingKey: SubscribeKey.ToString());
         }
 
 		public void Consume()
 		{
-		    if (_queue == null)
-		    {
-		        throw new ConsumerNotSubscribedException();    
-		    }
+            if (_queue == null)
+            {
+                throw new ConsumerNotSubscribedException();
+            }
 
-		    _isConsuming = true;
+            _isConsuming = true;
 
             Task.Factory.StartNew(() =>
 		    {

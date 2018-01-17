@@ -55,7 +55,7 @@ namespace User
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            listMeasures.Clear();
+            listMeasures.Items.Clear();
         }
 
         public void Update(MeasureValue value)
@@ -66,6 +66,7 @@ namespace User
                 item.SubItems.Add(value.GetStringValue());
                 item.SubItems.Add(value.Status);
                 listMeasures.Items.Add(item);
+                listMeasures.EnsureVisible(listMeasures.Items.Count - 1);
             }));
         }
 

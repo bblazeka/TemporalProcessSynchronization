@@ -29,31 +29,30 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnStart = new System.Windows.Forms.Button();
-            this.btnStop = new System.Windows.Forms.Button();
+            this.subscriptionStatus = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cbxCritical = new System.Windows.Forms.CheckBox();
             this.cbxNormal = new System.Windows.Forms.CheckBox();
             this.cbxWarning = new System.Windows.Forms.CheckBox();
-            this.cbxCritical = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnClear = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listMeasures = new System.Windows.Forms.ListView();
             this.Timestamp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label3 = new System.Windows.Forms.Label();
-            this.subscriptionStatus = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.subscriptionStatus);
             this.groupBox1.Controls.Add(this.label3);
@@ -69,52 +68,47 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
             // 
-            // label1
+            // subscriptionStatus
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(6, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(462, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Check types of alerts you with to subscribe to and press start to start consuming" +
-    " received values.";
+            this.subscriptionStatus.AutoSize = true;
+            this.subscriptionStatus.ForeColor = System.Drawing.Color.DarkRed;
+            this.subscriptionStatus.Location = new System.Drawing.Point(223, 78);
+            this.subscriptionStatus.Name = "subscriptionStatus";
+            this.subscriptionStatus.Size = new System.Drawing.Size(78, 13);
+            this.subscriptionStatus.TabIndex = 9;
+            this.subscriptionStatus.Text = "Not subscribed";
             // 
-            // groupBox2
+            // label3
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.listMeasures);
-            this.groupBox2.Controls.Add(this.btnClear);
-            this.groupBox2.Location = new System.Drawing.Point(12, 266);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(529, 269);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Received subscription alerts";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(177, 78);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Status:";
             // 
-            // btnStart
+            // groupBox3
             // 
-            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStart.Location = new System.Drawing.Point(445, 193);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
-            this.btnStart.TabIndex = 2;
-            this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            this.groupBox3.Controls.Add(this.cbxCritical);
+            this.groupBox3.Controls.Add(this.cbxNormal);
+            this.groupBox3.Controls.Add(this.cbxWarning);
+            this.groupBox3.Location = new System.Drawing.Point(9, 78);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(143, 100);
+            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Subscriptions";
             // 
-            // btnStop
+            // cbxCritical
             // 
-            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStop.Location = new System.Drawing.Point(364, 193);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(75, 23);
-            this.btnStop.TabIndex = 3;
-            this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            this.cbxCritical.AutoSize = true;
+            this.cbxCritical.Location = new System.Drawing.Point(6, 68);
+            this.cbxCritical.Name = "cbxCritical";
+            this.cbxCritical.Size = new System.Drawing.Size(57, 17);
+            this.cbxCritical.TabIndex = 5;
+            this.cbxCritical.Text = "Critical";
+            this.cbxCritical.UseVisualStyleBackColor = true;
+            this.cbxCritical.CheckStateChanged += new System.EventHandler(this.cbxCritical_CheckStateChanged);
             // 
             // cbxNormal
             // 
@@ -138,17 +132,6 @@
             this.cbxWarning.UseVisualStyleBackColor = true;
             this.cbxWarning.CheckStateChanged += new System.EventHandler(this.cbxWarning_CheckStateChanged);
             // 
-            // cbxCritical
-            // 
-            this.cbxCritical.AutoSize = true;
-            this.cbxCritical.Location = new System.Drawing.Point(6, 68);
-            this.cbxCritical.Name = "cbxCritical";
-            this.cbxCritical.Size = new System.Drawing.Size(57, 17);
-            this.cbxCritical.TabIndex = 5;
-            this.cbxCritical.Text = "Critical";
-            this.cbxCritical.UseVisualStyleBackColor = true;
-            this.cbxCritical.CheckStateChanged += new System.EventHandler(this.cbxCritical_CheckStateChanged);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -159,30 +142,52 @@
             this.label2.Text = "If you wish to change subscription stop listening. Change subscriptions and press" +
     " Start again.";
             // 
-            // groupBox3
+            // btnStop
             // 
-            this.groupBox3.Controls.Add(this.cbxCritical);
-            this.groupBox3.Controls.Add(this.cbxNormal);
-            this.groupBox3.Controls.Add(this.cbxWarning);
-            this.groupBox3.Location = new System.Drawing.Point(9, 78);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(143, 100);
-            this.groupBox3.TabIndex = 7;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Subscriptions";
+            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStop.Location = new System.Drawing.Point(364, 193);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(75, 23);
+            this.btnStop.TabIndex = 3;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // btnClear
+            // btnStart
             // 
-            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStart.Location = new System.Drawing.Point(445, 193);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.TabIndex = 2;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Location = new System.Drawing.Point(6, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(462, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Check types of alerts you with to subscribe to and press start to start consuming" +
+    " received values.";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(393, 240);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(127, 23);
-            this.btnClear.TabIndex = 2;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.groupBox2.Controls.Add(this.listMeasures);
+            this.groupBox2.Controls.Add(this.btnClear);
+            this.groupBox2.Location = new System.Drawing.Point(12, 240);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(529, 295);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Received subscription alerts";
             // 
             // listMeasures
             // 
@@ -195,7 +200,7 @@
             this.Status});
             this.listMeasures.Location = new System.Drawing.Point(9, 19);
             this.listMeasures.Name = "listMeasures";
-            this.listMeasures.Size = new System.Drawing.Size(511, 215);
+            this.listMeasures.Size = new System.Drawing.Size(511, 241);
             this.listMeasures.TabIndex = 3;
             this.listMeasures.UseCompatibleStateImageBehavior = false;
             this.listMeasures.View = System.Windows.Forms.View.Details;
@@ -215,24 +220,16 @@
             this.Status.Text = "Status";
             this.Status.Width = 114;
             // 
-            // label3
+            // btnClear
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(177, 78);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Status:";
-            // 
-            // subscriptionStatus
-            // 
-            this.subscriptionStatus.AutoSize = true;
-            this.subscriptionStatus.ForeColor = System.Drawing.Color.DarkRed;
-            this.subscriptionStatus.Location = new System.Drawing.Point(223, 78);
-            this.subscriptionStatus.Name = "subscriptionStatus";
-            this.subscriptionStatus.Size = new System.Drawing.Size(78, 13);
-            this.subscriptionStatus.TabIndex = 9;
-            this.subscriptionStatus.Text = "Not subscribed";
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClear.Location = new System.Drawing.Point(445, 266);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 2;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // ConsumerForm
             // 
@@ -247,9 +244,9 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConsumerForm_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -65,25 +65,25 @@ namespace Broker
             _channel.QueueDeclare(queue: Queues.GeigerReceiverQueue, durable: true, exclusive: true);
             _channel.QueueBind(queue: Queues.GeigerReceiverQueue, exchange: Exchanges.AlertsReceiverExchange, routingKey: "");
 
-            _channel.QueueDeclare(queue: Queues.NormalAlertQueue, durable: true, exclusive: false);
-            _channel.QueueDeclare(queue: Queues.WarniningAlertQueue, durable: true, exclusive: false);
-            _channel.QueueDeclare(queue: Queues.CriticalAlertQueue, durable: true, exclusive: false);
+            //_channel.QueueDeclare(queue: Queues.NormalAlertQueue, durable: true, exclusive: false);
+            //_channel.QueueDeclare(queue: Queues.WarniningAlertQueue, durable: true, exclusive: false);
+            //_channel.QueueDeclare(queue: Queues.CriticalAlertQueue, durable: true, exclusive: false);
 
-            _channel.QueueBind(
-                queue: Queues.NormalAlertQueue, 
-                exchange: Exchanges.AlertsPublisherExchange, 
-                routingKey: ThresholdStatus.Normal.ToString()
-            );
-            _channel.QueueBind(
-                queue: Queues.WarniningAlertQueue, 
-                exchange: Exchanges.AlertsPublisherExchange, 
-                routingKey: ThresholdStatus.Warning.ToString()
-            );
-            _channel.QueueBind(
-                queue: Queues.CriticalAlertQueue, 
-                exchange: Exchanges.AlertsPublisherExchange, 
-                routingKey: ThresholdStatus.Critical.ToString()
-            );
+            //_channel.QueueBind(
+            //    queue: Queues.NormalAlertQueue, 
+            //    exchange: Exchanges.AlertsPublisherExchange, 
+            //    routingKey: ThresholdStatus.Normal.ToString()
+            //);
+            //_channel.QueueBind(
+            //    queue: Queues.WarniningAlertQueue, 
+            //    exchange: Exchanges.AlertsPublisherExchange, 
+            //    routingKey: ThresholdStatus.Warning.ToString()
+            //);
+            //_channel.QueueBind(
+            //    queue: Queues.CriticalAlertQueue, 
+            //    exchange: Exchanges.AlertsPublisherExchange, 
+            //    routingKey: ThresholdStatus.Critical.ToString()
+            //);
         }
 
         public void Dispose()
