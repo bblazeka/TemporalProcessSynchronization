@@ -8,9 +8,9 @@ using RabbitMQ.Client.Events;
 
 namespace User
 {
-    public class UserWorker : IDisposable, Base.IObserver<AlertConsumer>
+    public class UserWorker : Observable<MeasureValue>, IDisposable
     {
-        private readonly string[] _subscriptions;
+        public string[] Subscriptions { private get; set; } = null;
 
         private IConnection _connection;
 
@@ -18,7 +18,11 @@ namespace User
 
         public UserWorker(string[] subscriptions)
         {
-            _subscriptions = subscriptions;
+            Subscriptions = subscriptions;
+        }
+
+        public UserWorker()
+        {
         }
 
         private void _removeConsumer(AlertConsumer consumer)
@@ -30,12 +34,27 @@ namespace User
             }
         }
 
+        public void Stop()
+        {
+            foreach (var consumer in _consumers)
+            {
+                consumer.StopConsuming();
+            }
+        }
+
         public void Start()
         {
+            if (Subscriptions == null)
+            {
+                throw new Exception("Subscriptions not set.");    
+            }
+
             void Command(object model, BasicDeliverEventArgs ea)
             {
                 var body = ea.Body;
                 var data = body.ToObject<MeasureValue>();
+
+                Notify(data);
 
                 Console.WriteLine($"Received data: [{data}]\n");
             }
@@ -44,23 +63,29 @@ namespace User
             _connection = factory.CreateConnection();
 
             Console.Write("----Waiting for [");
-            foreach (var subscription in _subscriptions)
+            foreach (var subscription in Subscriptions)
             {
                 Console.Write(subscription.ToUpper() + " ");
             }
             Console.WriteLine("] signals-----");
 
-            if (Array.IndexOf(_subscriptions, "normal") > -1)
+            if (Array.IndexOf(Subscriptions, "normal") > -1)
             {
-                _consumers.Add(new NormalAlertConsumer(_connection, Command));
+                var normalConsumer = new NormalAlertConsumer(_connection, Command);
+                // normalConsumer.Attach(this);
+                _consumers.Add(normalConsumer);
             }
-            if (Array.IndexOf(_subscriptions, "warning") > -1)
+            if (Array.IndexOf(Subscriptions, "warning") > -1)
             {
-                _consumers.Add(new WarningAlertConsumer(_connection, Command));   
+                var warningConsumer = new WarningAlertConsumer(_connection, Command);
+                // warningConsumer.Attach(this);
+                _consumers.Add(warningConsumer);   
             }
-            if (Array.IndexOf(_subscriptions, "critical") > -1)
+            if (Array.IndexOf(Subscriptions, "critical") > -1)
             {
-                _consumers.Add(new CriticalAlertConsumer(_connection, Command));
+                var criticalConsumer = new CriticalAlertConsumer(_connection, Command);
+                // criticalConsumer.Attach(this);
+                _consumers.Add(criticalConsumer);
             }
 
             foreach (var consumer in _consumers)
@@ -75,9 +100,9 @@ namespace User
             _connection.Dispose();
         }
 
-        public void Update(AlertConsumer value)
-        {
-            _removeConsumer(value);
-        }
+        //public void Update(AlertConsumer value)
+        //{
+        //    _removeConsumer(value);
+        //}
     }
 }

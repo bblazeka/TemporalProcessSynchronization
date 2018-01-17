@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Base;
 using RabbitMQ.Client;
@@ -6,11 +7,11 @@ using RabbitMQ.Client.Events;
 
 namespace MessageCommunication
 {
-	public abstract class AlertConsumer : Observable<AlertConsumer>, IDisposable
+	public abstract class AlertConsumer : IDisposable
 	{
 		private readonly IModel _channel;
 
-		private readonly EventingBasicConsumer _consumer;
+	    private readonly EventingBasicConsumer _consumer;
 
         public abstract string Queue { get; }
 
@@ -29,7 +30,7 @@ namespace MessageCommunication
 
         public void Subscribe(string exchange)
 		{
-            _queue = _channel.QueueDeclare(queue: Queue, durable: true, exclusive: false).QueueName;
+            _queue = _channel.QueueDeclare(durable: true, exclusive: false).QueueName;
             _channel.QueueBind(queue: _queue, exchange: exchange, routingKey: SubscribeKey.ToString());
         }
 
@@ -51,11 +52,13 @@ namespace MessageCommunication
 		    });
 		}
 
+        private HashSet<Base.IObserver<MeasureValue>> _valueObservers = new HashSet<Base.IObserver<MeasureValue>>();
+
 	    public void StopConsuming()
 	    {
 	        _isConsuming = false;
             Dispose();
-            Notify(this);
+            // Notify(this);
 	    }
 
 	    public void Dispose()

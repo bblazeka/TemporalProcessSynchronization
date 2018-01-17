@@ -6,8 +6,11 @@ namespace User
     {
         static void Main(string[] args)
         {
-            var worker = new UserWorker(args);
-            worker.Start();
+            //var worker = new UserWorker(args);
+            //worker.Start();
+
+            new ConsumerForm().ShowDialog();
+
             // Console.WriteLine("Receiving data...");
 
             //void Command(object model, BasicDeliverEventArgs ea)
