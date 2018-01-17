@@ -9,7 +9,7 @@ namespace MessageCommunication
 {
 	public abstract class AlertConsumer : IDisposable
 	{
-		private readonly IModel _channel;
+		private IModel _channel;
 
 	    private readonly EventingBasicConsumer _consumer;
 
@@ -30,7 +30,7 @@ namespace MessageCommunication
 
         public void Subscribe(string exchange)
 		{
-            _queue = _channel.QueueDeclare(durable: true, exclusive: false).QueueName;
+            _queue = _channel.QueueDeclare(durable: false, exclusive: true).QueueName;
             _channel.QueueBind(queue: _queue, exchange: exchange, routingKey: SubscribeKey.ToString());
         }
 
@@ -41,10 +41,10 @@ namespace MessageCommunication
 		        throw new ConsumerNotSubscribedException();    
 		    }
 
-		    Task.Factory.StartNew(() =>
-		    {
-		        _isConsuming = true;
+		    _isConsuming = true;
 
+            Task.Factory.StartNew(() =>
+		    {
 		        while (_isConsuming)
 		        {
 		            _channel.BasicConsume(queue: _queue, noAck: false, consumer: _consumer);
@@ -58,7 +58,6 @@ namespace MessageCommunication
 	    {
 	        _isConsuming = false;
             Dispose();
-            // Notify(this);
 	    }
 
 	    public void Dispose()
