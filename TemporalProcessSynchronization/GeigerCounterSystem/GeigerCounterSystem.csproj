@@ -35,6 +35,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeigerSystemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeigerSystemForm.Designer.cs">
+      <DependentUpon>GeigerSystemForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="CounterSystem.cs" />
     <Compile Include="MeasurementManager.cs" />
@@ -58,6 +66,11 @@
       <Project>{32F0D577-655A-432D-B4DB-89DDC0066443}</Project>
       <Name>MessageCommunication</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GeigerSystemForm.resx">
+      <DependentUpon>GeigerSystemForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

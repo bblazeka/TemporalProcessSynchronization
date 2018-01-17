@@ -21,7 +21,7 @@ namespace Base
         {
             foreach (var observer in _observers)
             {
-                observer.Dispose(value);
+                observer.Update(value);
             }
         }
     }

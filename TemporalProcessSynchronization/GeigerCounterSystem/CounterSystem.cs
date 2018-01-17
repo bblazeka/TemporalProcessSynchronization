@@ -8,9 +8,9 @@ using Base.Interfaces;
 
 namespace GeigerCounterSystem
 {
-	public class CounterSystem
+	public class CounterSystem : Observable<MeasureValue>
 	{
-		private const int SendDelay = 1000;	// send every 5 seconds
+		private readonly int SendDelay;	// send every 5 seconds
 
 		private readonly Stopwatch _watch;
 		private readonly ISender _sender;
@@ -18,12 +18,14 @@ namespace GeigerCounterSystem
 
 		private bool _isRunning;
 
-		public CounterSystem(MeasurementManager manager, ISender sender)
+		public CounterSystem(MeasurementManager manager, ISender sender, int delay = 3000)
 		{
 			_watch = Stopwatch.StartNew();
 			_isRunning = false;
 
-			_sender = sender;
+		    SendDelay = delay;
+
+            _sender = sender;
 			_measurementManager = manager;
 		}
 
@@ -49,10 +51,12 @@ namespace GeigerCounterSystem
 		            Thread.Sleep(SendDelay);
 
 		            var data = ThresholdCalculator.Calculate(_emulateMeasurement());
-		            var bytes = data.ToByteArray();
+		            data.TimeStamp = _watch.ElapsedTicks;
+                    var bytes = data.ToByteArray();
 		            _sender.Send(bytes);
 		            Console.WriteLine($"Sent data: [{data}]\n");
-		        }
+		            Notify(data);
+                }
 
 		        Console.WriteLine("Stopping measuring and sending...");
             });

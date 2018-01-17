@@ -75,7 +75,7 @@ namespace User
             _connection.Dispose();
         }
 
-        public void Dispose(AlertConsumer value)
+        public void Update(AlertConsumer value)
         {
             _removeConsumer(value);
         }

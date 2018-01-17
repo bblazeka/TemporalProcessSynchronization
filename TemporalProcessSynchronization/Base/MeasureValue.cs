@@ -1,13 +1,20 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Base
 {
 	[Serializable]
 	public class MeasureValue
 	{
+	    public long TimeStamp { get; set; }
+
 		public string Status { get; }
 
 		public double Value { get; }
+
+	    public string GetStringValue() => Value.ToString(CultureInfo.InvariantCulture);
+
+	    public string GetTimeStamp() => TimeStamp.ToString();
 
 		public MeasureValue(string status, double value)
 		{
@@ -17,7 +24,7 @@ namespace Base
 
 		public override string ToString()
 		{
-			return $"Status: {Status} | Measure: {Value} uSv/h";
+			return $"[{TimeStamp}] Status: {Status} | Measure: {Value} uSv/h";
 		}
 	}
 }

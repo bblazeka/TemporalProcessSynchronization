@@ -4,7 +4,7 @@ using RabbitMQ.Client;
 
 namespace MessageCommunication
 {
-	public class Sender : ISender, IDisposable
+	public class Sender : ISender
 	{
 		private readonly IModel _channel;
 		private readonly IConnection _connection;

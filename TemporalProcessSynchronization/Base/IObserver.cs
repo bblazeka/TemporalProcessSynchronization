@@ -2,6 +2,6 @@
 {
     public interface IObserver<T>
     {
-        void Dispose(T value);
+        void Update(T value);
     }
 }

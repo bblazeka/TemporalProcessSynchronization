@@ -1,6 +1,8 @@
-﻿namespace Base.Interfaces
+﻿using System;
+
+namespace Base.Interfaces
 {
-	public interface ISender
+	public interface ISender : IDisposable
 	{
 		void Send(byte[] data);
 
