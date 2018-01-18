@@ -77,9 +77,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Geiger1.cd" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="geiger.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

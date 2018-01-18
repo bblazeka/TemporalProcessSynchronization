@@ -52,8 +52,5 @@
     <Compile Include="Queues.cs" />
     <Compile Include="ThresholdStatus.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Base1.cd" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

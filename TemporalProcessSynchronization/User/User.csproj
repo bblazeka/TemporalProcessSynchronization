@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="User1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
