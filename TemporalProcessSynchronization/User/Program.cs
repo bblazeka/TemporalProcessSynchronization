@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace User
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
-            new ConsumerForm().ShowDialog();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new ConsumerForm());
         }
     }
 }

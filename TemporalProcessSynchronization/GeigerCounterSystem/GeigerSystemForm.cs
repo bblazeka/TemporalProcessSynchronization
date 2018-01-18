@@ -16,8 +16,7 @@ namespace GeigerCounterSystem
         public GeigerSystemForm()
         {
             _sender = new Sender(Exchanges.AlertsReceiverExchange, "fanout", "localhost");
-            var manager = new MeasurementManager("measures.txt");
-            _system = new CounterSystem(manager, _sender, 1000);
+            _system = new CounterSystem(new MeasuresGenerator(), _sender, 1000);
             _system.Attach(this);
 
             InitializeComponent();

@@ -52,8 +52,6 @@ namespace MessageCommunication
 		    });
 		}
 
-        private HashSet<Base.IObserver<MeasureValue>> _valueObservers = new HashSet<Base.IObserver<MeasureValue>>();
-
 	    public void StopConsuming()
 	    {
 	        _isConsuming = false;

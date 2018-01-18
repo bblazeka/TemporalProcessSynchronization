@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeigerSystemForm));
             this.btnStart = new System.Windows.Forms.Button();
             this.gbxCollectionManager = new System.Windows.Forms.GroupBox();
-            this.btnStop = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.gbxSentData = new System.Windows.Forms.GroupBox();
-            this.btnClearList = new System.Windows.Forms.Button();
-            this.listMeasures = new System.Windows.Forms.ListView();
-            this.label2 = new System.Windows.Forms.Label();
             this.collectionStatus = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.gbxSentData = new System.Windows.Forms.GroupBox();
+            this.listMeasures = new System.Windows.Forms.ListView();
             this.Timestamp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnClearList = new System.Windows.Forms.Button();
             this.gbxCollectionManager.SuspendLayout();
             this.gbxSentData.SuspendLayout();
             this.SuspendLayout();
@@ -71,16 +72,24 @@
             this.gbxCollectionManager.TabStop = false;
             this.gbxCollectionManager.Text = "Collection";
             // 
-            // btnStop
+            // collectionStatus
             // 
-            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnStop.Location = new System.Drawing.Point(90, 81);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(75, 23);
-            this.btnStop.TabIndex = 1;
-            this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            this.collectionStatus.AutoSize = true;
+            this.collectionStatus.ForeColor = System.Drawing.Color.DarkRed;
+            this.collectionStatus.Location = new System.Drawing.Point(392, 25);
+            this.collectionStatus.Name = "collectionStatus";
+            this.collectionStatus.Size = new System.Drawing.Size(47, 13);
+            this.collectionStatus.TabIndex = 5;
+            this.collectionStatus.Text = "Stopped";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(299, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Collection status:";
             // 
             // label1
             // 
@@ -91,6 +100,17 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Press Start to start collecting radiation measures.\r\nCollected measures will be d" +
     "isplayed in list below.\r\nIf you wish to stop measuring data, press Stop button.";
+            // 
+            // btnStop
+            // 
+            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStop.Location = new System.Drawing.Point(90, 81);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(75, 23);
+            this.btnStop.TabIndex = 1;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // gbxSentData
             // 
@@ -105,17 +125,6 @@
             this.gbxSentData.TabIndex = 3;
             this.gbxSentData.TabStop = false;
             this.gbxSentData.Text = "Sent data";
-            // 
-            // btnClearList
-            // 
-            this.btnClearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearList.Location = new System.Drawing.Point(559, 333);
-            this.btnClearList.Name = "btnClearList";
-            this.btnClearList.Size = new System.Drawing.Size(75, 23);
-            this.btnClearList.TabIndex = 0;
-            this.btnClearList.Text = "Clear";
-            this.btnClearList.UseVisualStyleBackColor = true;
-            this.btnClearList.Click += new System.EventHandler(this.btnClearList_Click);
             // 
             // listMeasures
             // 
@@ -133,38 +142,31 @@
             this.listMeasures.UseCompatibleStateImageBehavior = false;
             this.listMeasures.View = System.Windows.Forms.View.Details;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(299, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Collection status:";
-            // 
-            // collectionStatus
-            // 
-            this.collectionStatus.AutoSize = true;
-            this.collectionStatus.ForeColor = System.Drawing.Color.DarkRed;
-            this.collectionStatus.Location = new System.Drawing.Point(392, 25);
-            this.collectionStatus.Name = "collectionStatus";
-            this.collectionStatus.Size = new System.Drawing.Size(47, 13);
-            this.collectionStatus.TabIndex = 5;
-            this.collectionStatus.Text = "Stopped";
-            // 
             // Timestamp
             // 
             this.Timestamp.Text = "Timestamp";
-            this.Timestamp.Width = 180;
+            this.Timestamp.Width = 247;
             // 
             // Value
             // 
             this.Value.Text = "Value";
-            this.Value.Width = 194;
+            this.Value.Width = 203;
             // 
             // Status
             // 
             this.Status.Text = "Status";
+            this.Status.Width = 155;
+            // 
+            // btnClearList
+            // 
+            this.btnClearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearList.Location = new System.Drawing.Point(559, 333);
+            this.btnClearList.Name = "btnClearList";
+            this.btnClearList.Size = new System.Drawing.Size(75, 23);
+            this.btnClearList.TabIndex = 0;
+            this.btnClearList.Text = "Clear";
+            this.btnClearList.UseVisualStyleBackColor = true;
+            this.btnClearList.Click += new System.EventHandler(this.btnClearList_Click);
             // 
             // GeigerSystemForm
             // 
@@ -173,6 +175,7 @@
             this.ClientSize = new System.Drawing.Size(664, 508);
             this.Controls.Add(this.gbxSentData);
             this.Controls.Add(this.gbxCollectionManager);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(612, 504);
             this.Name = "GeigerSystemForm";
             this.Text = "Geiger System";

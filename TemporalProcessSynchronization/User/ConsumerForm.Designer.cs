@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsumerForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.subscriptionStatus = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -238,6 +239,7 @@
             this.ClientSize = new System.Drawing.Size(553, 547);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(569, 586);
             this.Name = "ConsumerForm";
             this.Text = "Consumer";

@@ -1,15 +1,16 @@
 ﻿using System;
-using Base;
-using MessageCommunication;
-using System.Threading;
+using System.Windows.Forms;
 
 namespace GeigerCounterSystem
 {
     public class Program
     {
+        [STAThread]
         public static void Main(string[] args)
         {
-            new GeigerSystemForm().ShowDialog();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new GeigerSystemForm());
         }
     }
 }

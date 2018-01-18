@@ -10,15 +10,15 @@ namespace GeigerCounterSystem
 {
 	public class CounterSystem : Observable<MeasureValue>
 	{
-		private readonly int SendDelay;	// send every 5 seconds
+		private readonly int SendDelay;
 
 		private readonly Stopwatch _watch;
 		private readonly ISender _sender;
-		private readonly MeasurementManager _measurementManager;
+		private readonly IMeasurementManager _measurementManager;
 
 		private bool _isRunning;
 
-		public CounterSystem(MeasurementManager manager, ISender sender, int delay = 3000)
+		public CounterSystem(IMeasurementManager manager, ISender sender, int delay = 5000)
 		{
 			_watch = Stopwatch.StartNew();
 			_isRunning = false;
@@ -28,16 +28,9 @@ namespace GeigerCounterSystem
             _sender = sender;
 			_measurementManager = manager;
 		}
-
-		private int _getCalculatedRow()
-		{
-			var secondsRunning = (int) _watch.ElapsedMilliseconds / 1000;
-			return secondsRunning % 100 + 2;
-		}
-
 		private double _emulateMeasurement()
 		{
-			return _measurementManager.GetMeasure(_getCalculatedRow());
+		    return _measurementManager.GetMeasure();
 		}
 
 		public void StartMeasuring()
@@ -54,11 +47,8 @@ namespace GeigerCounterSystem
 		            data.TimeStamp = _watch.ElapsedTicks;
                     var bytes = data.ToByteArray();
 		            _sender.Send(bytes);
-		            Console.WriteLine($"Sent data: [{data}]\n");
 		            Notify(data);
                 }
-
-		        Console.WriteLine("Stopping measuring and sending...");
             });
 		}
 
